@@ -1,20 +1,23 @@
+// 🔄 Toon/verberg secties
 function toggleSection(id) {
   const allSections = document.querySelectorAll("main section");
   const placeholder = document.getElementById("placeholder");
 
   allSections.forEach(section => {
-    if (section.id === id) {
-      section.classList.remove("hidden");
-    } else {
-      section.classList.add("hidden");
-    }
+    section.classList.add("hidden");
   });
+
+  const targetSection = document.getElementById(id);
+  if (targetSection) {
+    targetSection.classList.remove("hidden");
+  }
 
   if (placeholder && id !== "placeholder") {
     placeholder.classList.add("hidden");
   }
 }
 
+// 🎉 Confetti-functie
 function vierFeest() {
   confetti({
     particleCount: 150,
@@ -23,23 +26,18 @@ function vierFeest() {
   });
 }
 
-function openOutlook() {
-  vierFeest();
-  window.open(
-    "https://outlook.com",
-    "_blank"
-  );
-}
-
-function openGmail() {
-  vierFeest();
-  window.open(
-    "https://mail.google.com/mail/?view=cm&to=dj-tenj@outlook.com&su=Boeking%20DJ%20T%26J",
-    "_blank"
-  );
-}
-
+// E-mailactie
 function openMailto() {
   vierFeest();
   window.location.href = "mailto:dj-tenj@outlook.com?subject=Boeking%20DJ%20T%26J";
+}
+
+// 🔁 Klikbaar logo met confetti en herladen
+function triggerConfettiAndReload(event) {
+  event.preventDefault();
+  vierFeest();
+
+  setTimeout(() => {
+    location.reload();
+  }, 1000);
 }
