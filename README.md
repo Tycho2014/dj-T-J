@@ -1,5 +1,5 @@
 # Welkom bij DJ T&J! 
 
-uw favoriete DJ!
+De beste muziek voor de laagste prijs!
 #
-De link is tycho2014.github.io/dj-T-J
+Kijk op tycho2014.github.io/dj-T-J
