@@ -1,95 +1,1589 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DJ T & J</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="favicon.ico" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ T & J</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Algemene stijlen */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #E63946;
+            --secondary: #457B9D;
+            --accent: #A8DADC;
+            --dark: #1D3557;
+            --light: #F1FAEE;
+            --text: #333333;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(69, 123, 157, 0.3);
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(69, 123, 157, 0.4);
+        }
+        
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease 0.2s;
+        }
+        
+        .section-title.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        
+        /* Header stijlen */
+        header {
+            background: rgba(29, 53, 87, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(29, 53, 87, 0.98);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 0 5px rgba(230, 57, 70, 0.3));
+        }
+        
+        .logo h1 {
+            font-size: 2rem;
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--light);
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 1001;
+        }
+        
+        /* Hero sectie */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: 
+                linear-gradient(135deg, rgba(29, 53, 87, 0.9) 0%, rgba(69, 123, 157, 0.8) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231D3557"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23457B9D" stroke-width="1"/></svg>');
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-logo {
+            max-width: 350px;
+            margin: 0 auto 40px;
+            filter: drop-shadow(0 0 15px rgba(241, 250, 238, 0.3));
+            opacity: 0;
+            transform: scale(0.5);
+            animation: logoEntrance 1.5s ease-out 0.5s forwards;
+        }
+        
+        .hero-logo img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out 1s forwards;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease-out 1.3s forwards;
+        }
+        
+        .motto {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 30px 0;
+            font-family: 'Montserrat', sans-serif;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: popIn 1s ease-out 1.6s forwards;
+        }
+        
+        .special-offer {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--light);
+            margin: 25px 0;
+            font-family: 'Montserrat', sans-serif;
+            background: rgba(230, 57, 70, 0.9);
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: inline-block;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: popIn 1s ease-out 1.8s forwards;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease-out 2s forwards;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease-out 2.2s forwards;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            box-shadow: 0 4px 15px rgba(168, 218, 220, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+        
+        /* Badge stijlen */
+        .badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .kids-badge {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+        }
+        
+        .noordwijkerhout-badge {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(69, 123, 157, 0.3);
+        }
+        
+        .no-remix-badge {
+            background: var(--dark);
+            color: white;
+            box-shadow: 0 4px 10px rgba(29, 53, 87, 0.3);
+        }
+        
+        .music-badge {
+            background: var(--accent);
+            color: var(--dark);
+            box-shadow: 0 4px 10px rgba(168, 218, 220, 0.3);
+        }
+        
+        .price-badge {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 10px rgba(69, 123, 157, 0.3);
+            font-size: 1rem;
+            padding: 12px 25px;
+        }
+        
+        /* Over ons sectie */
+        .about {
+            background: var(--light);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease 0.3s;
+        }
+        
+        .about-text.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 25px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .feature h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        .feature p {
+            font-size: 0.95rem;
+            color: var(--text);
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease 0.5s;
+        }
+        
+        .about-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .dj-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Team sectie */
+        .team {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .team-member {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .team-member.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .team-member::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 4px solid white;
+        }
+        
+        .team-member h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .team-member .role {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .team-member .age {
+            color: var(--secondary);
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 500;
+        }
+        
+        .team-member p {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        /* Diensten sectie */
+        .services {
+            background: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 50px 35px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        .service-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .service-card p {
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        .price-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .price-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .price-section h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .price-main {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 20px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .price-offer {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin: 15px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .price-note {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-top: 20px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .no-remixes {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .no-remixes.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .no-remixes h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .no-remixes p {
+            font-size: 1.1rem;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        /* Contact sectie */
+        .contact {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .contact-content {
+            display: flex;
+            gap: 60px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease 0.3s;
+        }
+        
+        .contact-info.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text);
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease 0.5s;
+        }
+        
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.5s ease;
+        }
+        
+        .contact-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 20px;
+            width: 40px;
+        }
+        
+        .contact-item h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        .contact-item p {
+            color: var(--text);
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+        
+        .form-group.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.1);
+            background: white;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: center;
+            display: none;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            animation: popIn 0.5s ease-out;
+        }
+        
+        .form-message.success {
+            background: var(--secondary);
+            color: white;
+            display: block;
+        }
+        
+        .form-message.error {
+            background: var(--primary);
+            color: white;
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 70px 0 30px;
+            text-align: center;
+            color: var(--light);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .footer-logo-img {
+            height: 70px;
+            width: auto;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            flex: 1;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        .footer-links a:hover {
+            color: var(--light);
+            transform: translateX(5px);
+        }
+        
+        .footer-links h4 {
+            color: var(--light);
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(241, 250, 238, 0.2);
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            
+            .footer-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .motto {
+                font-size: 1.6rem;
+            }
+            
+            .special-offer {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(29, 53, 87, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav li {
+                margin: 20px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 15px;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .motto {
+                font-size: 1.4rem;
+            }
+            
+            .special-offer {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .price-main {
+                font-size: 2.2rem;
+            }
+            
+            .price-offer {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes logoEntrance {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <a href="#" onclick="triggerConfettiAndReload(event)">
-      <img src="logo.png" alt="DJ T&J Logo" class="logo" />
-    </a>
-    <h1>DJ T&J</h1>
-    <p>De beste muziek voor de laagste prijs!</p>
-    <nav>
-      <ul>
-        <li><button onclick="toggleSection('over')">Over Ons</button></li>
-        <li><button onclick="toggleSection('diensten')">Diensten</button></li>
-        <li><button onclick="toggleSection('contact')">Reserveren en Contact</button></li>
-        <li><button onclick="toggleSection('personeel')">Personeel</button></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="placeholder">
-      <h2>Welkom bij DJ T&J!</h2>
-      <p>Wij zorgen voor muziek op elk soort feest: groot of klein, druk of juist rustig.
-        Of je nu een knallende dansvloer wilt of gewoon gezellige achtergrondmuziek; wij passen ons aan jouw wensen aan.
-        We draaien alle muziekstijlen: van Nederlandstalig tot house, van klassiekers tot de nieuwste hits.
-        Wij doen ook geen remixes, geen ingewikkelde techniek, maar gewoon goede muziek zoals jij die kent en leuk vindt.
-        Met onze ervaring en passie maken we van elk feest iets bijzonders.
-        Klik op een van de knoppen hierboven en ontdek wat wij voor jou kunnen betekenen!</p>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true" alt="DJ T & J Logo" class="logo-img">
+                <h1>DJ T & J</h1>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Over Ons</a></li>
+                    <li><a href="#team">Ons Team</a></li>
+                    <li><a href="#services">Diensten</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Sectie -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <img src="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true" alt="DJ T & J Logo">
+                </div>
+                <h2>DJ T & J</h2>
+                <p>Uw DJ-service voor elk feest</p>
+                <div class="motto">De beste muziek voor de laagste prijs!</div>
+                <div class="special-offer">€30 per uur en nu zelfs 2e uur gratis!</div>
+                <div class="hero-badges">
+                    <div class="badge kids-badge">100 % kinderen</div>
+                    <div class="badge noordwijkerhout-badge">Noordwijkerhout</div>
+                    <div class="badge no-remix-badge">Geen Remixes</div>
+                    <div class="badge music-badge">Alle Muziekstijlen</div>
+                    <div class="badge price-badge">€30 per uur</div>
+                </div>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Huur Nu</a>
+                    <a href="#services" class="btn btn-secondary">Onze Diensten</a>
+                </div>
+            </div>
+        </div>
     </section>
+    
+    <!-- Over Ons Sectie -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Over Ons</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>De beste muziek voor de laagste prijs!</h3>
+                    <p>Welkom bij DJ T & J, de DJ-service gerund door een enthousiast team van jonge talenten. Wij brengen de beat in feest.</p>
+                    <p>Bij ons zijn alle muziekstijlen mogelijk!</p>
+                    
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-euro-sign"></i>
+                            <h4>Beste Prijs</h4>
+                            <p>€30 per uur - 2e uur gratis!</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-music"></i>
+                            <h4>Alle Muziekstijlen</h4>
+                            <p>Van pop tot hiphop en alles ertussenin</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>Noordwijkerhout</h4>
+                            <p>Beschikbaar in de hele bollenstreek</p>
+                        </div>
+                    </div>
+                    
+                    <p>Met onze moderne apparatuur en uitgebreide muziekbibliotheek zorgen we voor een professionele geluidskwaliteit. Onze focus ligt op het creëren van de perfecte sfeer voor jouw evenement, tegen een betaalbare prijs.</p>
+                    <a href="#contact" class="btn">Neem Contact Op</a>
+                </div>
+                <div class="about-image">
+                    <div class="dj-image" style="background: linear-gradient(45deg, var(--primary), var(--secondary)); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+                        DJ T & J in actie!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Sectie -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Ons Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Jim Schellekens</h3>
+                    <div class="role">Eigenaar & Hoofd DJ</div>
+                    <div class="age">Leeftijd: 11 jaar</div>
+                    <p>Jim is de drijvende kracht achter DJ T & J. Hij verzorgt de technische aspecten en zorgt voor een uitgebalanceerde muziekselectie die perfect aansluit bij elk publiek.</p>
+                    <div class="badge kids-badge">Teamleider</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Tycho van Rijn</h3>
+                    <div class="role">Tweede Eigenaar & DJ</div>
+                    <div class="age">Leeftijd: 10 jaar</div>
+                    <p>Tycho werkt nauw samen met Jim om de perfecte muzikale ervaring te creëren. Hij heeft een scherp oor voor de wensen van het publiek en past de muziek hierop aan.</p>
+                    <div class="badge kids-badge">Co-Leider</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>Feliciano Zalm</h3>
+                    <div class="role">Manager</div>
+                    <div class="age">Leeftijd: 11 jaar</div>
+                    <p>Feliciano regelt alle planning en communicatie. Hij zorgt voor een soepel verloop van alle afspraken en staat klaar om al je vragen te beantwoorden.</p>
+                    <div class="badge kids-badge">Organisator</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <div class="badge kids-badge" style="font-size: 1.2rem; padding: 12px 25px;">Ons Team Bestaat Voor 100% Uit Kinderen!</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Diensten Sectie -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Onze Diensten</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3>Verjaardagsfeesten</h3>
+                    <p>Maak van jouw verjaardag een onvergetelijk feest met muziek die perfect aansluit bij jouw smaak en die van je gasten.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3>Schoolfeesten</h3>
+                    <p>Van schoolfeest tot eindfeest: wij zorgen voor de juiste sfeer waar iedereen van kan genieten!</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Kinderfeesten</h3>
+                    <p>Speciaal afgestemd op jongere kinderen met een mix van kinderliedjes en toegankelijke popmuziek.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Jeugd Evenementen</h3>
+                    <p>Voor elk feest waar kinderen en jongeren samenkomen. Wij weten wat de jeugd wil horen!</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Buurtfeesten</h3>
+                    <p>Voor buurtfeesten en wijkfeesten zorgen wij voor de juiste sfeer waar jong en oud van kunnen genieten!</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Op Maat Gemaakt</h3>
+                    <p>Ieder feest is uniek. We maken graag samen met jou een gepersonaliseerde playlist met jouw favoriete nummers!</p>
+                </div>
+            </div>
+            
+            <div class="price-section">
+                <h3>Speciale Aanbieding!</h3>
+                <div class="price-main">€30 PER UUR</div>
+                <div class="price-offer">2e UUR GRATIS!</div>
+                <p class="price-note">Boek minimaal 2 uur en krijg het tweede uur helemaal gratis!</p>
+            </div>
+            
+            <div class="no-remixes">
+                <h3>Belangrijk: Geen Remixes!</h3>
+                <p>Wij draaien alleen de originele versies van nummers. Geen remixes, mashups of bewerkte versies - alleen de echte hits die iedereen kent en waarop iedereen kan meezingen!</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Sectie -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Stuur ons een bericht</h3>
+                    <p>Wil je ons boeken voor jouw feest? Vul het formulier in en we nemen zo snel mogelijk contact met je op!</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Eigenaar</h4>
+                            <p>Jimschel1@outlook.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Locatie</h4>
+                            <p>Noordwijkerhout</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h4>Team Samenstelling</h4>
+                            <p>100% kinderen (10-11 jaar)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div>
+                            <h4>Muziekbeleid</h4>
+                            <p>Geen remixes - alleen originele nummers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div>
+                            <h4>Ons Motto</h4>
+                            <p>Kwaliteitsmuziek tegen een betaalbare prijs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <div>
+                            <h4>Prijzen</h4>
+                            <p>€30 per uur - 2e uur GRATIS!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mblpkpyb" method="POST">
+                        <div class="form-group">
+                            <label for="name">Naam</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="event">Type Evenement</label>
+                            <select id="event" name="event-type" required>
+                                <option value="">Kies een optie</option>
+                                <option value="birthday">Verjaardagsfeest</option>
+                                <option value="school">Schoolfeest</option>
+                                <option value="youth">Jeugdevenement</option>
+                                <option value="neighborhood">Buurtfeest</option>
+                                <option value="other">Anders</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Datum Evenement</label>
+                            <input type="date" id="date" name="event-date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hours">Aantal uren</label>
+                            <select id="hours" name="hours" required>
+                                <option value="">Kies aantal uren</option>
+                                <option value="1">1 uur (€30)</option>
+                                <option value="2">2 uur (€30 - 2e uur GRATIS!)</option>
+                                <option value="3">3 uur (€60)</option>
+                                <option value="4">4 uur (€80)</option>
+                                <option value="5">5 uur (€120)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Bericht</label>
+                            <textarea id="message" name="message" placeholder="Vertel ons meer over jouw feestje..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Inzenden</button>
+                        
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true" alt="DJ T & J Logo" class="footer-logo-img">
+                    <p style="font-size: 1.1rem; margin: 15px 0; font-family: 'Open Sans', sans-serif; font-weight: 400;">Jouw feest, onze muziek. Professionele DJ-service voor elk feestje!</p>
+                    <div class="badge kids-badge" style="margin-top: 20px; font-size: 1rem;">100% Kinderen</div>
+                    <div class="motto" style="font-size: 1.2rem; margin: 20px 0;">Kwaliteitsmuziek tegen een betaalbare prijs</div>
+                    <div class="special-offer" style="font-size: 1.1rem; margin: 15px 0; padding: 10px 20px;">€30 PER UUR - 2E UUR GRATIS!</div>
+                </div>
+                
+                <div class="footer-links">
+                    <ul>
+                        <li><h4>Navigatie</h4></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">Over Ons</a></li>
+                        <li><a href="#team">Ons Team</a></li>
+                        <li><a href="#services">Diensten</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    
+                    <ul>
+                        <li><h4>Diensten</h4></li>
+                        <li><a href="#services">Verjaardagsfeesten</a></li>
+                        <li><a href="#services">Schoolfeesten</a></li>
+                        <li><a href="#services">Kinderfeesten</a></li>
+                        <li><a href="#services">Jeugdevenementen</a></li>
+                        <li><a href="#services">Buurtfeesten</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/jim-schellekens-3a2a80373/" target="_blank" title="Bekijk ons LinkedIn profiel">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 DJ T & J. Alle rechten voorbehouden. | Email: Jimschel1@outlook.com | Locatie: Noordwijkerhout</p>
+            </div>
+        </div>
+    </footer>
 
-    <section id="over" class="hidden">
-      <h2>Over Ons</h2>
-      <p>Wij zijn een klein, enthousiast team dat draait met plezier en passie.
-        We doen dit omdat we het leuk vinden, niet om rijk te worden.
-        Daarom houden we onze prijzen laag, zodat iedereen een DJ kan boeken voor een betaalbaar feest.
-        We draaien alle soorten muziek: van feestnummers tot rustige achtergrondmuziek.
-        Geen remixes of ingewikkelde dingen, gewoon muziek zoals jij die kent en leuk vindt.
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
         
-       Of het nu gaat om een verjaardag, bruiloft, borrel of bedrijfsfeest: wij zorgen voor de juiste sfeer en de juiste sound.
-
-       Klik verder en ontdek wat we voor jouw feest kunnen betekenen!</p>
-    </section>
-
-    <section id="diensten" class="hidden">
-      <h2>Diensten</h2>
-      <p>Wij draaien voor 50 euro per uur (En nu zelfs 2de uur gratis!).
-        Daarmee zijn we heel erg voordelig: andere DJ’s van ons niveau kunnen wel 125 tot 200 euro vragen.
-        Daarom is het het slimste om voor ons te kiezen als je niet te veel geld wil uitgeven.
-        LET OP: Ons team bestaat voor 100% uit kinderen!</p>
-    </section>
-
-    <section id="contact" class="hidden">
-      <h2>Contact en reserveren</h2>
-      <div class="email-knoppen">
-        <p>Klaar om jouw feest onvergetelijk te maken?
-          Stuur ons een mailtje en wij nemen zo snel mogelijk contact met je op.
-          Of je nu een knallende party wilt of gewoon benieuwd bent naar wat we voor jou kunnen betekenen, wij staan klaar met muziek, energie en enthousiasme!</p>
-        <p>Email: Jimschel1@outlook.com</p>
-        <button onclick="openMailto()">Reserveren</button>
-      </div>
-    </section>
-
-    <section id="personeel" class="hidden">
-      <h2>Ons Team</h2>
-      <ul class="teamlist">
-        <li>Jim Schellekens (11) Eigenaar installatie en bedrijf</li>
-        <br>
-        <li>Tycho van Rijn (10) Mede-eigenaar van het bedrijf</li>
-        <br>
-        <li>Feliciyano van der Zalm (11) - Manager</li>
-      </ul>
-      <p>DJ T&J bestaat uit een klein maar enthousiast team dat samen zorgt voor sfeer, muziek en een soepel verloop van elk feest.
-      Iedereen binnen ons team heeft z’n eigen rol, maar we werken altijd samen om het beste resultaat neer te zetten.
-      Van het regelen van de installatie tot het draaien van de muziek en het contact met klanten, wij doen het met plezier.
-      We zijn flexibel, betrouwbaar en houden van een goede sfeer.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 DJ T&J - Alle rechten voorbehouden</p>
-  </footer>
-
-  <!-- 🔧 Scripts -->
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Form submission with Formspree
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const messageDiv = document.getElementById('formMessage');
+            
+            // Disable submit button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Versturen...';
+            messageDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    messageDiv.textContent = 'Bedankt voor uw bericht. We zullen u zo gauw mogelijk via e-mail een antwoord geven.';
+                    messageDiv.className = 'form-message success';
+                    messageDiv.style.display = 'block';
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                messageDiv.textContent = 'Er is een fout opgetreden. Probeer het later opnieuw of stuur een email naar Jimschel1@outlook.com';
+                messageDiv.className = 'form-message error';
+                messageDiv.style.display = 'block';
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Verstuur Bericht';
+                
+                // Scroll to message
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate child elements with delays
+                    if (entry.target.classList.contains('about-text')) {
+                        const features = entry.target.querySelectorAll('.feature');
+                        features.forEach((feature, index) => {
+                            setTimeout(() => {
+                                feature.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                    
+                    if (entry.target.classList.contains('contact-info')) {
+                        const items = entry.target.querySelectorAll('.contact-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 150);
+                        });
+                    }
+                    
+                    if (entry.target.classList.contains('contact-form')) {
+                        const formGroups = entry.target.querySelectorAll('.form-group');
+                        formGroups.forEach((group, index) => {
+                            setTimeout(() => {
+                                group.classList.add('visible');
+                            }, index * 100);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animated elements
+        document.querySelectorAll('section, .section-title, .about-text, .about-image, .team-member, .service-card, .no-remixes, .price-section, .contact-info, .contact-form').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Add current year to copyright
+        document.querySelector('.copyright p').innerHTML = `&copy; ${new Date().getFullYear()} DJ T & J. Alle rechten voorbehouden. | Email: Jimschel1@outlook.com | Locatie: Noordwijkerhout`;
+    </script>
 </body>
 </html>
