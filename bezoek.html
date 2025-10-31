@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welkom bij DJ T & J</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1D3557 0%, #457B9D 100%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .loading-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+        }
+        
+        .logo {
+            max-width: 200px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 0 15px rgba(241, 250, 238, 0.4));
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #F1FAEE;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #A8DADC;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(168, 218, 220, 0.3);
+            border-top: 6px solid #E63946;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+        
+        .counter {
+            font-size: 1.5rem;
+            color: #F1FAEE;
+            font-weight: bold;
+            background: rgba(230, 57, 70, 0.9);
+            padding: 12px 25px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .test-info {
+            background: rgba(168, 218, 220, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <img src="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true" alt="DJ T & J Logo" class="logo">
+        <h1>Welkom bij DJ T & J!</h1>
+        <p>Je wordt nu doorgestuurd naar onze website</p>
+        <div class="loader"></div>
+        <div class="counter" id="counter">Bezoekers laden...</div>
+        
+        <!-- Alleen tonen tijdens testen -->
+        <div class="test-info" id="testInfo" style="display: none;">
+            <strong>Test modus</strong><br>
+            Counter.dev werkt alleen op een echte website, niet lokaal.
+        </div>
+    </div>
+
+    <!-- Counter.dev tracking met JOUW ID -->
+    <script src="https://cdn.counter.dev/script.js" data-id="5cca26f1-1e83-4627-b68e-5662877b65e9" data-utcoffset="2"></script>
+
+    <script>
+        // Toon test info als we lokaal zijn
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            document.getElementById('testInfo').style.display = 'block';
+            document.getElementById('counter').textContent = 'Lokaal testen - online teller werkt niet';
+        } else {
+            // Toon tijdelijk aantal (voor de look)
+            document.getElementById('counter').textContent = 'Bezoekers worden geteld...';
+        }
+
+        // Stuur door na 2 seconden
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000);
+
+        console.log('Pagina geladen - doorsturen over 2 seconden');
+    </script>
+</body>
+</html>
