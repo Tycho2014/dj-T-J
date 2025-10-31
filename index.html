@@ -951,6 +951,79 @@
             font-weight: 400;
         }
         
+        /* DJ Gek Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .video-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            width: 800px;
+            background: var(--dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.5s ease;
+        }
+        
+        .video-modal.active .video-container {
+            transform: scale(1);
+        }
+        
+        .video-header {
+            padding: 15px 20px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .video-header h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        
+        .close-video {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .close-video:hover {
+            transform: scale(1.2);
+        }
+        
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
         /* Responsive design */
         @media (max-width: 992px) {
             .about-content,
@@ -987,6 +1060,10 @@
             
             .section-title {
                 font-size: 2.4rem;
+            }
+            
+            .video-container {
+                width: 95%;
             }
         }
         
@@ -1188,9 +1265,9 @@
                         <i class="fas fa-crown"></i>
                     </div>
                     <h3>Jim Schellekens</h3>
-                    <div class="role">Eigenaar & Hoofd DJ</div>
+                    <div class="role">Eigenaar & DJ</div>
                     <div class="age">Leeftijd: 11 jaar</div>
-                    <p>Jim is de drijvende kracht achter DJ T & J. Hij verzorgt de technische aspecten en zorgt voor een uitgebalanceerde muziekselectie die perfect aansluit bij elk publiek.</p>
+                    <p>Ik ben Jim. Ik ben eigenaar van DJ - T & J en eigenaar van de muziekinstallatie.</p>
                     <div class="badge kids-badge">Teamleider</div>
                 </div>
                 <div class="team-member">
@@ -1200,7 +1277,7 @@
                     <h3>Tycho van Rijn</h3>
                     <div class="role">Tweede Eigenaar & DJ</div>
                     <div class="age">Leeftijd: 10 jaar</div>
-                    <p>Tycho werkt nauw samen met Jim om de perfecte muzikale ervaring te creëren. Hij heeft een scherp oor voor de wensen van het publiek en past de muziek hierop aan.</p>
+                    <p>Hallo! Ik ben Tycho en ik ben 10 jaar oud. Ik hou heel erg van DJ´en. Ik doe dit samen met Jim om een zakcentje te verdienen maar vooral omdat het een leuke hobby is.</p>
                     <div class="badge kids-badge">Co-Leider</div>
                 </div>
                 <div class="team-member">
@@ -1210,7 +1287,7 @@
                     <h3>Feliciano Zalm</h3>
                     <div class="role">Manager</div>
                     <div class="age">Leeftijd: 11 jaar</div>
-                    <p>Feliciano regelt alle planning en communicatie. Hij zorgt voor een soepel verloop van alle afspraken en staat klaar om al je vragen te beantwoorden.</p>
+                    <p>Ik ben Feliciano. Ik ben manager. Ik zorg voor een soepel verloop van het feestje. Zo kunt u optimaal genieten zonder zorgen. Laat dat maar aan mij over!</p>
                     <div class="badge kids-badge">Organisator</div>
                 </div>
             </div>
@@ -1453,6 +1530,20 @@
         </div>
     </footer>
 
+    <!-- DJ Gek Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <div class="video-header">
+                <h3>Bedankt voor uw reservering!</h3>
+                <button class="close-video" id="closeVideo">&times;</button>
+            </div>
+            <video class="video-player" id="djGekVideo" controls>
+                <source src="DJ Gek doen.mp4" type="video/mp4">
+                Je browser ondersteunt de video tag niet.
+            </video>
+        </div>
+    </div>
+
     <script>
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
@@ -1503,9 +1594,15 @@
                 });
                 
                 if (response.ok) {
-                    messageDiv.textContent = 'Bedankt voor uw bericht. We zullen u zo gauw mogelijk via e-mail een antwoord geven.';
+                    messageDiv.textContent = 'Bedankt voor uw reservering! We zullen u zo gauw mogelijk via e-mail een antwoord geven.';
                     messageDiv.className = 'form-message success';
                     messageDiv.style.display = 'block';
+                    
+                    // Show DJ Gek video after successful reservation
+                    setTimeout(() => {
+                        showVideoModal();
+                    }, 1500);
+                    
                     form.reset();
                 } else {
                     throw new Error('Form submission failed');
@@ -1584,6 +1681,38 @@
         
         // Add current year to copyright
         document.querySelector('.copyright p').innerHTML = `&copy; ${new Date().getFullYear()} DJ T & J. Alle rechten voorbehouden. | Email: Jimschel1@outlook.com | Locatie: Noordwijkerhout`;
+        
+        // DJ Gek Video Modal functionality
+        const videoModal = document.getElementById('videoModal');
+        const djGekVideo = document.getElementById('djGekVideo');
+        const closeVideo = document.getElementById('closeVideo');
+        
+        function showVideoModal() {
+            videoModal.classList.add('active');
+            djGekVideo.play();
+        }
+        
+        function hideVideoModal() {
+            videoModal.classList.remove('active');
+            djGekVideo.pause();
+            djGekVideo.currentTime = 0;
+        }
+        
+        closeVideo.addEventListener('click', hideVideoModal);
+        
+        // Close modal when clicking outside the video container
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                hideVideoModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                hideVideoModal();
+            }
+        });
     </script>
 </body>
 </html>
