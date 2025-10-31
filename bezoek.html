@@ -83,9 +83,9 @@
     <div class="loading-container">
         <img src="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true" alt="DJ T & J Logo" class="logo">
         <h1>Welkom bij DJ T & J!</h1>
-        <p>Je wordt nu doorgestuurd naar onze website</p>
+        <p>Je wordt nu doorgestuurd...</p>
         <div class="loader"></div>
-        <div class="counter" id="counter">Bezoekers laden...</div>
+        <div class="counter" id="counter">Bedankt dat u de tijd neemt om de QR - Code te scannen.</div>
         
         <!-- Alleen tonen tijdens testen -->
         <div class="test-info" id="testInfo" style="display: none;">
@@ -101,7 +101,7 @@
         // Toon test info als we lokaal zijn
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
             document.getElementById('testInfo').style.display = 'block';
-            document.getElementById('counter').textContent = 'Lokaal testen - online teller werkt niet';
+            document.getElementById('counter').textContent = 'Teller werkt niet';
         } else {
             // Toon tijdelijk aantal (voor de look)
             document.getElementById('counter').textContent = 'Bezoekers worden geteld...';
