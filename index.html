@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJ T & J</title>
+    <link rel="icon" type="image/x-icon" href="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -126,12 +127,16 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         .logo-img {
             height: 70px;
             width: auto;
             filter: drop-shadow(0 0 5px rgba(230, 57, 70, 0.3));
+            animation: logoFloat 6s ease-in-out infinite;
         }
         
         .logo h1 {
@@ -186,6 +191,25 @@
             right: 20px;
             top: 20px;
             z-index: 1001;
+        }
+        
+        /* Huur Nu knop in navigatie */
+        .nav-hire-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(69, 123, 157, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .nav-hire-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(69, 123, 157, 0.4);
+            animation: none;
         }
         
         /* Hero sectie */
@@ -408,7 +432,7 @@
         }
         
         .feature:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) rotate(2deg);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
@@ -494,7 +518,7 @@
         }
         
         .team-member:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
@@ -511,6 +535,7 @@
             color: white;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             border: 4px solid white;
+            animation: photoSpin 10s linear infinite;
         }
         
         .team-member h3 {
@@ -585,7 +610,7 @@
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotateY(5deg);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
@@ -593,6 +618,7 @@
             font-size: 3.5rem;
             margin-bottom: 30px;
             color: var(--primary);
+            animation: iconBounce 2s ease-in-out infinite;
         }
         
         .service-card h3 {
@@ -643,6 +669,7 @@
             color: var(--primary);
             margin: 20px 0;
             font-family: 'Montserrat', sans-serif;
+            animation: pricePulse 3s infinite;
         }
         
         .price-offer {
@@ -1025,6 +1052,20 @@
         }
         
         /* Responsive design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+            
+            .hero h2 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+        
         @media (max-width: 992px) {
             .about-content,
             .contact-content {
@@ -1065,6 +1106,14 @@
             .video-container {
                 width: 95%;
             }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1085,6 +1134,7 @@
                 transition: left 0.3s ease;
                 backdrop-filter: blur(10px);
                 z-index: 999;
+                gap: 30px;
             }
             
             nav ul.active {
@@ -1092,7 +1142,7 @@
             }
             
             nav li {
-                margin: 20px 0;
+                margin: 10px 0;
             }
             
             .hero h2 {
@@ -1111,7 +1161,7 @@
             }
             
             .logo h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             
             .logo-img {
@@ -1142,6 +1192,80 @@
             .price-offer {
                 font-size: 1.3rem;
             }
+            
+            .hero-badges {
+                gap: 10px;
+            }
+            
+            .badge {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .motto {
+                font-size: 1.2rem;
+            }
+            
+            .special-offer {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .badge {
+                width: 80%;
+                text-align: center;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .logo h1 {
+                display: none;
+            }
+            
+            .logo {
+                transform: translateX(-50%) scale(0.8);
+            }
         }
         
         /* Animations */
@@ -1164,6 +1288,32 @@
             0% { opacity: 0; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1); }
         }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        @keyframes photoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pricePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
     </style>
 </head>
 <body>
@@ -1183,7 +1333,7 @@
                     <li><a href="#about">Over Ons</a></li>
                     <li><a href="#team">Ons Team</a></li>
                     <li><a href="#services">Diensten</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact" class="nav-hire-btn">Huur Nu</a></li>
                 </ul>
             </nav>
         </div>
@@ -1199,7 +1349,7 @@
                 <h2>DJ T & J</h2>
                 <p>Uw DJ-service voor elk feest</p>
                 <div class="motto">De beste muziek voor de laagste prijs!</div>
-                <div class="special-offer">€30 per uur en nu zelfs 2e uur gratis!</div>
+                <div class="special-offer">€30 per uur</div>
                 <div class="hero-badges">
                     <div class="badge kids-badge">100 % kinderen</div>
                     <div class="badge noordwijkerhout-badge">Noordwijkerhout</div>
@@ -1229,7 +1379,7 @@
                         <div class="feature">
                             <i class="fas fa-euro-sign"></i>
                             <h4>Beste Prijs</h4>
-                            <p>€30 per uur - 2e uur gratis!</p>
+                            <p>€30 per uur</p>
                         </div>
                         <div class="feature">
                             <i class="fas fa-music"></i>
@@ -1244,7 +1394,7 @@
                     </div>
                     
                     <p>Met onze moderne apparatuur en uitgebreide muziekbibliotheek zorgen we voor een professionele geluidskwaliteit. Onze focus ligt op het creëren van de perfecte sfeer voor jouw evenement, tegen een betaalbare prijs.</p>
-                    <a href="#contact" class="btn">Neem Contact Op</a>
+                    <a href="#contact" class="btn">Huur Nu</a>
                 </div>
                 <div class="about-image">
                     <div class="dj-image" style="background: linear-gradient(45deg, var(--primary), var(--secondary)); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
@@ -1347,10 +1497,9 @@
             </div>
             
             <div class="price-section">
-                <h3>Speciale Aanbieding!</h3>
+                <h3>Transparante Prijzen!</h3>
                 <div class="price-main">€30 PER UUR</div>
-                <div class="price-offer">2e UUR GRATIS!</div>
-                <p class="price-note">Boek minimaal 2 uur en krijg het tweede uur helemaal gratis!</p>
+                <p class="price-note">Eerlijke prijzen zonder verrassingen!</p>
             </div>
             
             <div class="no-remixes">
@@ -1363,10 +1512,10 @@
     <!-- Contact Sectie -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Contact</h2>
+            <h2 class="section-title">Huur Nu</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Stuur ons een bericht</h3>
+                    <h3>Boek ons voor jouw feest</h3>
                     <p>Wil je ons boeken voor jouw feest? Vul het formulier in en we nemen zo snel mogelijk contact met je op!</p>
                     
                     <div class="contact-item">
@@ -1425,7 +1574,7 @@
                         </div>
                         <div>
                             <h4>Prijzen</h4>
-                            <p>€30 per uur - 2e uur GRATIS!</p>
+                            <p>€30 per uur</p>
                         </div>
                     </div>
                 </div>
@@ -1464,11 +1613,17 @@
                             <select id="hours" name="hours" required>
                                 <option value="">Kies aantal uren</option>
                                 <option value="1">1 uur (€30)</option>
-                                <option value="2">2 uur (€30 - 2e uur GRATIS!)</option>
-                                <option value="3">3 uur (€60)</option>
-                                <option value="4">4 uur (€80)</option>
-                                <option value="5">5 uur (€120)</option>
+                                <option value="2">2 uur (€60)</option>
+                                <option value="3">3 uur (€90)</option>
+                                <option value="4">4 uur (€120)</option>
+                                <option value="5">5 uur (€150)</option>
                             </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="discount">Kortingscode (optioneel)</label>
+                            <input type="text" id="discount" name="discount-code" placeholder="Voer kortingscode in">
+                            <small id="discountMessage" style="display:none; color: var(--primary); font-weight: bold;"></small>
                         </div>
                         
                         <div class="form-group">
@@ -1476,7 +1631,7 @@
                             <textarea id="message" name="message" placeholder="Vertel ons meer over jouw feestje..." required></textarea>
                         </div>
                         
-                        <button type="submit" class="btn">Inzenden</button>
+                        <button type="submit" class="btn">Boek Nu</button>
                         
                         <div id="formMessage" class="form-message"></div>
                     </form>
@@ -1494,7 +1649,7 @@
                     <p style="font-size: 1.1rem; margin: 15px 0; font-family: 'Open Sans', sans-serif; font-weight: 400;">Jouw feest, onze muziek. Professionele DJ-service voor elk feestje!</p>
                     <div class="badge kids-badge" style="margin-top: 20px; font-size: 1rem;">100% Kinderen</div>
                     <div class="motto" style="font-size: 1.2rem; margin: 20px 0;">Kwaliteitsmuziek tegen een betaalbare prijs</div>
-                    <div class="special-offer" style="font-size: 1.1rem; margin: 15px 0; padding: 10px 20px;">€30 PER UUR - 2E UUR GRATIS!</div>
+                    <div class="special-offer" style="font-size: 1.1rem; margin: 15px 0; padding: 10px 20px;">€30 PER UUR</div>
                 </div>
                 
                 <div class="footer-links">
@@ -1504,7 +1659,7 @@
                         <li><a href="#about">Over Ons</a></li>
                         <li><a href="#team">Ons Team</a></li>
                         <li><a href="#services">Diensten</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#contact">Huur Nu</a></li>
                     </ul>
                     
                     <ul>
@@ -1525,7 +1680,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 DJ T & J. Alle rechten voorbehouden. | Email: Jimschel1@outlook.com | Locatie: Noordwijkerhout</p>
+                <p>&copy; 2025 DJ T & J. Alle rechten voorbehouden. | Email: Jimschel1@outlook.com | Locatie: Noordwijkerhout</p>
             </div>
         </div>
     </footer>
@@ -1545,6 +1700,9 @@
     </div>
 
     <script>
+        // Lijst met geldige kortingscodes
+        const validDiscountCodes = ['uurgratis', 'djtkorting', 'feest2024'];
+        
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
@@ -1567,6 +1725,28 @@
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
+            }
+        });
+        
+        // Kortingscode validatie
+        const discountInput = document.getElementById('discount');
+        const discountMessage = document.getElementById('discountMessage');
+        
+        discountInput.addEventListener('blur', () => {
+            const code = discountInput.value.trim();
+            if (code === '') {
+                discountMessage.style.display = 'none';
+                return;
+            }
+            
+            if (validDiscountCodes.includes(code.toLowerCase())) {
+                discountMessage.textContent = '✅ Kortingscode geldig! U krijgt het 2e uur gratis!';
+                discountMessage.style.display = 'block';
+                discountMessage.style.color = 'var(--secondary)';
+            } else {
+                discountMessage.textContent = '❌ Kortingscode ongeldig';
+                discountMessage.style.display = 'block';
+                discountMessage.style.color = 'var(--primary)';
             }
         });
         
@@ -1614,7 +1794,7 @@
             } finally {
                 // Re-enable submit button
                 submitButton.disabled = false;
-                submitButton.textContent = 'Verstuur Bericht';
+                submitButton.textContent = 'Boek Nu';
                 
                 // Scroll to message
                 messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
