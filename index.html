@@ -1321,7 +1321,7 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="https://github.com/Tycho2014/dj-T-J/blob/main/logo.png?raw=true" alt="DJ T & J Logo" class="logo-img">
+                <img src="logo.png" alt="DJ T & J Logo" class="logo-img">
                 <h1>DJ T & J</h1>
             </div>
             <div class="menu-toggle" id="menuToggle">
@@ -1694,14 +1694,14 @@
             </div>
             <video class="video-player" id="djGekVideo" controls>
                 <source src="DJ Gek doen.mp4" type="video/mp4">
-                Je browser ondersteunt de video tag niet.
+                Sorry, het filmpje kon niet worden geladen.
             </video>
         </div>
     </div>
 
     <script>
         // Lijst met geldige kortingscodes
-        const validDiscountCodes = ['uurgratis', 'djtkorting', 'feest2024'];
+        const validDiscountCodes = ['uurgratis', 'newyear2026'];
         
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
@@ -1740,11 +1740,11 @@
             }
             
             if (validDiscountCodes.includes(code.toLowerCase())) {
-                discountMessage.textContent = '✅ Kortingscode geldig! U krijgt het 2e uur gratis!';
+                discountMessage.textContent = '✅ Kortingscode geldig! U krijgt uw korting!';
                 discountMessage.style.display = 'block';
                 discountMessage.style.color = 'var(--secondary)';
             } else {
-                discountMessage.textContent = '❌ Kortingscode ongeldig';
+                discountMessage.textContent = '❌ Helaas is die kortingscode ongeldig.';
                 discountMessage.style.display = 'block';
                 discountMessage.style.color = 'var(--primary)';
             }
@@ -1774,7 +1774,7 @@
                 });
                 
                 if (response.ok) {
-                    messageDiv.textContent = 'Bedankt voor uw reservering! We zullen u zo gauw mogelijk via e-mail een antwoord geven.';
+                    messageDiv.textContent = 'Bedankt voor uw reservering! We zullen u zo gauw mogelijk antwoorden.';
                     messageDiv.className = 'form-message success';
                     messageDiv.style.display = 'block';
                     
@@ -1788,13 +1788,13 @@
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
-                messageDiv.textContent = 'Er is een fout opgetreden. Probeer het later opnieuw of stuur een email naar Jimschel1@outlook.com';
+                messageDiv.textContent = 'Er is een fout opgetreden met insturen. Probeer het later opnieuw of stuur een zelf een email naar Jimschel1@outlook.com';
                 messageDiv.className = 'form-message error';
                 messageDiv.style.display = 'block';
             } finally {
                 // Re-enable submit button
                 submitButton.disabled = false;
-                submitButton.textContent = 'Boek Nu';
+                submitButton.textContent = 'Probeer opnieuw';
                 
                 // Scroll to message
                 messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
